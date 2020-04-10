@@ -1,18 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry } from 'react-native';
+import { 
+    StyleSheet, 
+    Text, 
+    View, 
+    // AppRegistry, 
+    TextInput, 
+    Dimensions 
+} from 'react-native';
 import { NativeRouter, Route, Link } from "react-router-native";
+const { width: WIDTH } = Dimensions.get('window');
 
 export const Header = (props) => {
     return (
         <View style={styles.header}>
             <Text style={styles.text}>Global Life</Text>
         </View>
-      
     );
 };
 
 const styles = StyleSheet.create({
     header: {
+        width: '100%',
         height: 80,
         alignItems: 'center',
         justifyContent: 'flex-end',
@@ -20,7 +28,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10
     },
     text: {
-        color: '#ffd05c',
+        color: 'yellow',
         fontSize: 25
     },
 });
