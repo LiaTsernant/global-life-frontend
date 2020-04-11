@@ -9,24 +9,34 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import map from '../../images/map.png';
+import { Actions } from 'react-native-router-flux';
+
 
 const { width: WIDTH } = Dimensions.get('window');
 
 
 class Login extends React.Component {
+    goToMain = () => {
+        Actions.main();
+    };
+
+    goToSignup = () => {
+        Actions.signup();
+    };
+    
     render() {
         return (
             <View style={styles.backgroundContainer}>
                 <View style={styles.map}> 
                     <Image source={map} style={styles.map}></Image>
                 </View>
-                <Text style={styles.login}>Log In</Text>
+                <Text style={styles.login}>Login</Text>
 
                 <View style={styles.inputContainer}>
                     <TextInput 
                         style={styles.input}
                         placeholder={'Username'}
-                        placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         underlineColorAndroid='transparent'
                     />
                 </View>
@@ -36,13 +46,16 @@ class Login extends React.Component {
                         style={styles.input}
                         placeholder={'Password'}
                         secureTextEntry={true}
-                        placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         underlineColorAndroid='transparent'
                     />
                 </View>
 
-                <TouchableOpacity style={styles.btnLogin}>  
+                <TouchableOpacity style={styles.btnLogin} onPress={this.goToMain}>  
                     <Text style={styles.text}>Login</Text>              
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.goToSignup}>  
+                    <Text style={styles.textSignup}>SignUp</Text>              
                 </TouchableOpacity>
 
             </View>
@@ -65,26 +78,25 @@ const styles = StyleSheet.create({
         width: 300,
         height: 150,
         resizeMode: 'contain',
-        tintColor: 'yellow'
+        tintColor: 'black'
     },
     login: {
         marginTop: 10,
-        color: 'yellow',
-        fontSize: 40,
-        fontWeight: '500',
-        marginBottom: 10
+        color: 'black',
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 3
     },
     inputContainer: {
         marginTop: 10,
-
     },
     input: {
         width: WIDTH - 55,
-        height: 45,
+        height: 40,
         borderRadius: 45,
         fontSize: 16,
         paddingLeft: 45,
-        backgroundColor: 'rgba(255, 255, 255, 0.35)',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
         color: 'rgba(0, 0, 0, 0.7)',
         marginHorizontal: 25,
     },
@@ -92,16 +104,20 @@ const styles = StyleSheet.create({
         width: WIDTH - 55,
         height: 45,
         borderRadius: 45,
-        backgroundColor: 'yellow',
+        backgroundColor: '#f0e24f',
         justifyContent: 'center',
         marginTop: 20,
-
     },
     text: {
         color: 'black',
         fontSize: 16,
         textAlign: 'center',
     },
+    textSignup: {
+        marginTop: 10,
+        color: 'black',
+        textDecorationLine: 'underline'
+    }
 });
 
 export default Login;
