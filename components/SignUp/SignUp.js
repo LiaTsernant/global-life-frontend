@@ -15,6 +15,22 @@ const { width: WIDTH } = Dimensions.get('window');
 
 
 class SignUp extends React.Component {
+    state = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        country: ''
+    };
+
+    _handleSingnUp() {
+        console.log(this.state.firstName);
+        console.log(this.state.lastName);
+        console.log(this.state.email);
+        console.log(this.state.password);
+        console.log(this.state.country);
+    };
+
     goToLogin() {
         Actions.login();
     };
@@ -33,6 +49,8 @@ class SignUp extends React.Component {
                         placeholder={'Firsl Name'}
                         placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
                         underlineColorAndroid='transparent'
+                        returnKeyLabel = { "next" } //WTF???????
+                        onChangeText={(text) => this.setState({ firstName: text })}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -41,6 +59,8 @@ class SignUp extends React.Component {
                         placeholder={'Last Name'}
                         placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
                         underlineColorAndroid='transparent'
+                        returnKeyLabel = { "next" } //WTF???????
+                        onChangeText={(text) => this.setState({ lastName: text })}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -49,6 +69,8 @@ class SignUp extends React.Component {
                         placeholder={'Email'}
                         placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
                         underlineColorAndroid='transparent'
+                        returnKeyLabel = { "next" } //WTF???????
+                        onChangeText={(text) => this.setState({ email: text })}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -58,6 +80,8 @@ class SignUp extends React.Component {
                         secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
                         underlineColorAndroid='transparent'
+                        returnKeyLabel = { "next" } //WTF???????
+                        onChangeText={(text) => this.setState({ password: text })}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -67,10 +91,12 @@ class SignUp extends React.Component {
                         secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
                         underlineColorAndroid='transparent'
+                        returnKeyLabel = { "next" } //WTF???????
+                        onChangeText={(text) => this.setState({ country: text })}
                     />
                 </View>
 
-                <TouchableOpacity style={styles.btnSignUp}>  
+                <TouchableOpacity style={styles.btnSignUp} onPress={ () => this._handleSingnUp() }>  
                     <Text style={styles.text}>Sign Up</Text>              
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.goToLogin}>  
