@@ -16,12 +16,25 @@ const { width: WIDTH } = Dimensions.get('window');
 
 
 class Login extends React.Component {
+    state = {
+        email: '',
+        password: '',
+    };
+
     goToMain = () => {
         Actions.main();
     };
 
     goToSignup = () => {
         Actions.signup();
+    };
+
+    _handleLogin() {
+        console.log(this.state.email);
+        console.log(this.state.password);
+
+        userAPI.login(this.state).
+            then(res => console.log(res));
     };
     
     render() {
@@ -30,14 +43,17 @@ class Login extends React.Component {
                 <View style={styles.map}> 
                     <Image source={map} style={styles.map}></Image>
                 </View>
+
                 <Text style={styles.login}>Login</Text>
 
                 <View style={styles.inputContainer}>
                     <TextInput 
                         style={styles.input}
-                        placeholder={'Username'}
+                        placeholder={'Email'}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         underlineColorAndroid='transparent'
+                        returnKeyLabel = { "next" } //WTF???????
+                        onChangeText={(text) => this.setState({ email: text })}
                     />
                 </View>
 
@@ -48,12 +64,15 @@ class Login extends React.Component {
                         secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         underlineColorAndroid='transparent'
+                        returnKeyLabel = { "next" } //WTF???????
+                        onChangeText={(text) => this.setState({ password: text })}
                     />
                 </View>
 
-                <TouchableOpacity style={styles.btnLogin} onPress={this.goToMain}>  
+                <TouchableOpacity style={styles.btnLogin} onPress={ () => this._handleLogin() }>  
                     <Text style={styles.text}>Login</Text>              
                 </TouchableOpacity>
+
                 <TouchableOpacity onPress={this.goToSignup}>  
                     <Text style={styles.textSignup}>SignUp</Text>              
                 </TouchableOpacity>
