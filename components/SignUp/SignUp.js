@@ -9,18 +9,23 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import map from '../../images/map.png';
+import { Actions } from 'react-native-router-flux';
 
 const { width: WIDTH } = Dimensions.get('window');
 
 
 class SignUp extends React.Component {
+    goToLogin() {
+        Actions.login();
+    };
+
     render() {
         return (
             <View style={styles.backgroundContainer}>
                 <View style={styles.map}> 
                     <Image source={map} style={styles.map}></Image>
                 </View>
-                <Text style={styles.login}>Sign Up</Text>
+                <Text style={styles.signUp}>Sign Up</Text>
 
                 <View style={styles.inputContainer}>
                     <TextInput 
@@ -65,8 +70,11 @@ class SignUp extends React.Component {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.btnLogin}>  
+                <TouchableOpacity style={styles.btnSignUp}>  
                     <Text style={styles.text}>Sign Up</Text>              
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.goToLogin}>  
+                    <Text style={styles.textLogin}>Login</Text>              
                 </TouchableOpacity>
 
             </View>
@@ -89,43 +97,46 @@ const styles = StyleSheet.create({
         width: 300,
         height: 150,
         resizeMode: 'contain',
-        tintColor: 'yellow'
+        tintColor: 'black'
     },
-    login: {
+    signUp: {
         marginTop: 10,
-        color: 'yellow',
-        fontSize: 40,
-        fontWeight: '500',
-        marginBottom: 10
+        color: 'black',
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 3
     },
     inputContainer: {
         marginTop: 10,
-
     },
     input: {
         width: WIDTH - 55,
-        height: 35,
+        height: 40,
         borderRadius: 45,
         fontSize: 16,
         paddingLeft: 45,
-        backgroundColor: 'rgba(255, 255, 255, 0.35)',
-        color: 'white',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        color: 'rgba(0, 0, 0, 0.7)',
         marginHorizontal: 25,
     },
-    btnLogin: {
+    btnSignUp: {
         width: WIDTH - 55,
         height: 45,
         borderRadius: 45,
-        backgroundColor: 'yellow',
+        backgroundColor: '#f0e24f',
         justifyContent: 'center',
         marginTop: 20,
-
     },
     text: {
         color: 'black',
         fontSize: 16,
         textAlign: 'center',
     },
+    textLogin: {
+        marginTop: 10,
+        color: 'black',
+        textDecorationLine: 'underline'
+    }
 });
 
 export default SignUp;
