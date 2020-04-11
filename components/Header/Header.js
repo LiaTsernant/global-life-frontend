@@ -13,7 +13,7 @@ const { width: WIDTH } = Dimensions.get('window');
 export const Header = (props) => {
     return (
         <View style={styles.header}>
-            <Text style={styles.text}>Global Life</Text>
+            <Text style={styles.text}>{props.mainPage}</Text>
         </View>
     );
 };
@@ -21,7 +21,7 @@ export const Header = (props) => {
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: 80,
+        height: 50,
         alignItems: 'center',
         justifyContent: 'flex-end',
         backgroundColor: 'black',
