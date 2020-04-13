@@ -2,33 +2,65 @@ import React from 'react';
 import { 
     StyleSheet, 
     Text, 
-    View, 
-    // AppRegistry, 
-    TextInput, 
+    View,
     Dimensions 
 } from 'react-native';
-import { NativeRouter, Route, Link } from "react-router-native";
+import { Actions } from 'react-native-router-flux';
+import { Scene, Stack } from 'react-native-router-flux';
+
+
 const { width: WIDTH } = Dimensions.get('window');
 
-export const Header = (props) => {
-    return (
-        <View style={styles.header}>
-            <Text style={styles.text}>{props.mainPage}</Text>
-        </View>
-    );
+class Header extends React.Component {
+
+    goToAbout = () => {
+        Actions.about()
+    };
+
+    goToProfile = () => {
+        Actions.profile()
+    };
+
+    goToMain = () => {
+        Actions.main()
+    }
+
+    render() {
+        console.log('re-render HEADER')
+        if (this.props.scene === 'main') {
+            return (
+                <View style={styles.header}>
+                    <Text style={styles.text} onPress={ () => this.goToAbout() }>About</Text>
+                    <Text style={styles.text} onPress={ () => this.goToProfile() }>Profile</Text>
+                </View>
+            );
+        } else {
+            return (
+                <View style={styles.header}>
+                    <Text style={styles.text} onPress={ () => this.goToMain() }>Main</Text>
+                    <Text style={styles.text} onPress={ () => this.goToProfile() }>Profile</Text>
+                </View>
+            );
+        };
+    };
 };
 
 const styles = StyleSheet.create({
     header: {
-        width: '100%',
+        width: WIDTH,
         height: 50,
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         backgroundColor: 'black',
         paddingBottom: 10
     },
     text: {
-        color: 'yellow',
-        fontSize: 25
+        color: 'white',
+        fontSize: 20,
+        margin: 10,
+        marginTop: 30
     },
 });
+
+export default Header;
