@@ -10,6 +10,12 @@ import {
 } from 'react-native';
 import map from '../../images/map.png';
 import { Actions } from 'react-native-router-flux';
+import apiCalls from '../../api/apiCalls';
+import { AsyncStorage } from 'react-native';
+import setAuthHeader from '../../utils/setAuthHeader';
+import jwt_decode from 'jwt-decode';
+
+
 
 
 const { width: WIDTH } = Dimensions.get('window');
@@ -18,7 +24,7 @@ const { width: WIDTH } = Dimensions.get('window');
 class Login extends React.Component {
     state = {
         email: '',
-        password: '',
+        _id: '',
     };
 
     goToMain = () => {
@@ -29,12 +35,32 @@ class Login extends React.Component {
         Actions.signup();
     };
 
-    _handleLogin() {
-        console.log(this.state.email);
-        console.log(this.state.password);
+    componentDidMount() {
+        if (AsyncStorage.getItem('jwtToken')) {
+            console.log(AsyncStorage);
 
-        userAPI.login(this.state).
-            then(res => console.log(res));
+            this.goToMain();
+        };
+    }
+
+    handleLogin = () => {
+        let user = this.state;
+
+        apiCalls.login(user).
+          then(res => {
+          if (res.status === 200) {
+            const token = res.data.token;
+            AsyncStorage.setItem('jwtToken', token);
+            setAuthHeader(token);
+            const decoded = jwt_decode(token);
+            this.setState({
+              email: decoded.email,
+              _id: decoded._id
+            });
+
+            this.goToMain();
+          };
+        }).catch(err => console.log(err));
     };
     
     render() {
@@ -69,7 +95,7 @@ class Login extends React.Component {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.btnLogin} onPress={ () => this._handleLogin() }>  
+                <TouchableOpacity style={styles.btnLogin} onPress={ () => this.handleLogin() }>  
                     <Text style={styles.text}>Login</Text>              
                 </TouchableOpacity>
 
