@@ -3,12 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Linking } from 'r
 import Header from '../../components/Header/Header';
 import { Actions } from 'react-native-router-flux';
 import apiCalls from '../../api/apiCalls';
+import { AsyncStorage } from 'react-native';
+
 
 const { width: WIDTH } = Dimensions.get('window');
 
 export default class Main extends Component {
   state = {
-    data: ''
+    data: '',
   }
 
   goToAbout = () => {
@@ -16,7 +18,12 @@ export default class Main extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state)
+    AsyncStorage.getItem('user').
+    then((value) => {
+        this.setState({'user': value })
+        console.log(this.state) //      PRINTS USER's ID!!!!!!!!!!!!!
+    }).catch((err) => console.log(err))
+
     apiCalls.countryShow("5e93b59bc21195772283320e").
       then(res => res.json()).
       then((res) => {
