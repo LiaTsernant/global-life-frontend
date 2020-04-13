@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import map from '../../images/map.png';
 import { Actions } from 'react-native-router-flux';
+import apiCalls from '../../api/apiCalls';
+
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -29,6 +31,9 @@ class SignUp extends React.Component {
         console.log(this.state.email);
         console.log(this.state.password);
         console.log(this.state.country);
+
+        // apiCalls.register(this.state).
+        //     then(res => console.log(res));
     };
 
     goToLogin() {
