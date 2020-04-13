@@ -15,11 +15,7 @@ import { AsyncStorage } from 'react-native';
 import setAuthHeader from '../../utils/setAuthHeader';
 import jwt_decode from 'jwt-decode';
 
-
-
-
 const { width: WIDTH } = Dimensions.get('window');
-
 
 class Login extends React.Component {
     state = {
@@ -35,35 +31,46 @@ class Login extends React.Component {
         Actions.signup();
     };
 
-    componentDidMount() {
-        if (AsyncStorage.getItem('jwtToken')) {
-            console.log(AsyncStorage);
-
-            this.goToMain();
-        };
-    }
+    async setToStorage(key, val) {
+        AsyncStorage.setItem(key, val);
+        this.setState({
+            key: val
+        });
+    };
 
     handleLogin = () => {
         let user = this.state;
 
         apiCalls.login(user).
-          then(res => {
-          if (res.status === 200) {
-            const token = res.data.token;
-            AsyncStorage.setItem('jwtToken', token);
-            setAuthHeader(token);
-            const decoded = jwt_decode(token);
-            this.setState({
-              email: decoded.email,
-              _id: decoded._id
-            });
+            then(res => {
+            if (res.status === 200) {
+                const token = res.data.token;
+                setAuthHeader(token);
+                const decoded = jwt_decode(token);
+                this.setToStorage('user', decoded._id);
+                
+                // this.setState({
+                //   email: decoded.email,
+                //   _id: decoded._id
+                // });
 
-            this.goToMain();
-          };
+                this.goToMain();
+            };
         }).catch(err => console.log(err));
     };
+
+    componentDidMount() {
+        AsyncStorage.getItem('user').
+        then((value) => {
+            this.setState({'user': value })
+            if (this.state.user) {
+                this.goToMain();
+            };
+        }).catch((err) => console.log(err));
+    }
     
     render() {
+        // console.log(this.state)
         return (
             <View style={styles.backgroundContainer}>
                 <View style={styles.map}> 
@@ -117,9 +124,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     map: {
-        // position: 'absolute',
-        // top: 0,
-        // marginTop: 5,
+
         width: 300,
         height: 150,
         resizeMode: 'contain',
