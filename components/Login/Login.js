@@ -48,11 +48,6 @@ class Login extends React.Component {
                 setAuthHeader(token);
                 const decoded = jwt_decode(token);
                 this.setToStorage('user', decoded._id);
-                
-                // this.setState({
-                //   email: decoded.email,
-                //   _id: decoded._id
-                // });
 
                 this.goToMain();
             };
