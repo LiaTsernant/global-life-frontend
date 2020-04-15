@@ -12,21 +12,21 @@ class App extends Component {
     '_id': ''
   };
 
-  register = (user) => {
-    apiCalls.register(user).
-        then(res => {
-        if (res.status === 200) {
-          const token = res.data.token;
-          AsyncStorage.setItem('jwtToken', token); 
-          setAuthHeader(token);
-          const decoded = jwt_decode(token);
-          this.setState({
-            email: decoded.email,
-            _id: decoded._id
-          });
-        };
-    }).catch(err => console.log(err));
-  };
+  // register = (user) => {
+  //   apiCalls.register(user).
+  //       then(res => {
+  //       if (res.status === 200) {
+  //         const token = res.data.token;
+  //         AsyncStorage.setItem('jwtToken', token); 
+  //         setAuthHeader(token);
+  //         const decoded = jwt_decode(token);
+  //         this.setState({
+  //           email: decoded.email,
+  //           _id: decoded._id
+  //         });
+  //       };
+  //   }).catch(err => console.log(err));
+  // };
 
   login = (user) => {
     apiCalls.login(user).
