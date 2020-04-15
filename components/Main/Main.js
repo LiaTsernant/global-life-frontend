@@ -5,7 +5,6 @@ import { Actions } from 'react-native-router-flux';
 import apiCalls from '../../api/apiCalls';
 import { AsyncStorage } from 'react-native';
 
-
 const { width: WIDTH } = Dimensions.get('window');
 
 export default class Main extends Component {
@@ -21,10 +20,10 @@ export default class Main extends Component {
     AsyncStorage.getItem('user').
     then((value) => {
         this.setState({'user': value })
-        console.log(this.state) //      PRINTS USER's ID!!!!!!!!!!!!!
+        // console.log(this.state) //      PRINTS USER's ID!!!!!!!!!!!!!
     }).catch((err) => console.log(err))
 
-    apiCalls.countryShow("5e93b59bc21195772283320e").
+    apiCalls.countryShow("Russia").
       then(res => res.json()).
       then((res) => {
         this.setState({
