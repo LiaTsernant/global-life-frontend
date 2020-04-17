@@ -28,16 +28,28 @@ const login = (user) => {
 const userShow = (userId) => {
   return fetch(`${endpoint}/users/${userId}`).
     catch(err => { console.log(err) });
+};
 
-}
+const updateUser = (user) => {
+  return axios.put(`${endpoint}/users/${user._id}`, user).
+    then(res => res).
+    catch(err => console.log(err));
+};
 
+const deleteUser = (userId) => {
+  return axios.delete(`${endpoint}/users/${userId}`).
+    then(res => res).
+    catch(err => console.log(err));
+};
 
 export default {
   countryIndex,
   countryShow,
   register,
   login,
-  userShow
+  userShow,
+  updateUser,
+  deleteUser
 };
 
 
