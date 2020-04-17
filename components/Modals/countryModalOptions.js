@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TouchableHighlight, Dimensions } from 'react-native';
 
-class SimpleModal extends Component {
+class CountryModalOptions extends Component {
   constructor(props) {
     super(props);
     this.options = ['Egypt', 'Greece', 'Italy', 'Russia']
@@ -19,6 +19,7 @@ class SimpleModal extends Component {
   changeModalVisibility = (bool) => {
     this.setState({ isModalVisible: bool })
   };
+
 
   closeModal = (bool, data) => {
     if (this.state.selectedItem === '') {
@@ -96,4 +97,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SimpleModal;
+export default CountryModalOptions;
