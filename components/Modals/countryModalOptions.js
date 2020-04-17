@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TouchableHighligh
 class CountryModalOptions extends React.Component {
   constructor(props) {
     super(props);
-    this.options = ['Egypt', 'Greece', 'Italy', 'Russia']
+    this.options = ['Albania', 'Austria', 'Azerbaijan', 'Belgium', 'Bulgaria', 'Egypt', 'Greece', 'Italy', 'Macedonia', 'Romania', 'Russia', 'Serbia', 'Singapore', 'Slovakia']
     this.state = {
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
@@ -19,7 +19,6 @@ class CountryModalOptions extends React.Component {
   changeModalVisibility = (bool) => {
     this.setState({ isModalVisible: bool })
   };
-
 
   closeModal = (bool, data) => {
     if (this.state.selectedItem === '') {
