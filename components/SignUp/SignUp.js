@@ -3,19 +3,17 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import map from '../../images/map.png';
 import { Actions } from 'react-native-router-flux';
 import apiCalls from '../../api/apiCalls';
 import CountryModal from '../Modals/countryModal';
 import setAuthHeader from '../../utils/setAuthHeader';
 import jwt_decode from 'jwt-decode';
 import { AsyncStorage } from 'react-native';
-
+import { ScrollView } from 'react-native-gesture-handler';
 
 class SignUp extends React.Component {
   state = {
@@ -23,7 +21,10 @@ class SignUp extends React.Component {
     lastName: '',
     email: '',
     password: '',
-    country: ''
+    country: '',
+    contactPersonName: "",
+    contactPersonPhone: "",
+    address: ""
   };
 
   async setToStorage(key, val) {
@@ -67,14 +68,12 @@ class SignUp extends React.Component {
 
   render() {
     return (
+      <ScrollView>
       <View style={styles.backgroundContainer}>
-        <View style={styles.map}>
-          <Image source={map} style={styles.map}></Image>
-        </View>
         <Text style={styles.signUp}>Sign Up</Text>
 
         <View style={styles.inputContainer}>
-          <CountryModal setSelectedCountry={this.setSelectedCountry}/>
+          <CountryModal setSelectedCountry={this.setSelectedCountry} />
         </View>
 
         <View style={styles.inputContainer}>
@@ -87,6 +86,7 @@ class SignUp extends React.Component {
             onChangeText={(text) => this.setState({ firstName: text })}
           />
         </View>
+          
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -97,6 +97,7 @@ class SignUp extends React.Component {
             onChangeText={(text) => this.setState({ lastName: text })}
           />
         </View>
+          
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -107,6 +108,7 @@ class SignUp extends React.Component {
             onChangeText={(text) => this.setState({ email: text })}
           />
         </View>
+          
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -118,15 +120,53 @@ class SignUp extends React.Component {
             onChangeText={(text) => this.setState({ password: text })}
           />
         </View>
+          
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder={'First Contact Person Phone'}
+            placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
+            underlineColorAndroid='transparent'
+            returnKeyLabel={"next"} //WTF???????
+            onChangeText={(text) => this.setState({ contactPersonPhone: text })}
+          />
+        </View>
+          
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder={'First Contact Person Name'}
+            placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
+            underlineColorAndroid='transparent'
+            returnKeyLabel={"next"} //WTF???????
+            onChangeText={(text) => this.setState({ contactPersonName: text })}
+          />
+        </View>
+          
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.address}
+            multiline={true}
+            numberOfLines={6}
+            placeholder={'Your Address'}
+            secureTextEntry={true}
+            placeholderTextColor={'rgba(255, 255, 255, 0.3)'}
+            underlineColorAndroid='transparent'
+            returnKeyLabel={"next"} //WTF???????
+            onChangeText={(text) => this.setState({ address: text })}
+          />
+        </View>
 
         <TouchableOpacity style={styles.btnSignUp} onPress={() => this.handleSingnUp()}>
           <Text style={styles.text}>Sign Up</Text>
         </TouchableOpacity>
+          
         <TouchableOpacity onPress={this.goToLogin}>
           <Text style={styles.textLogin}>Login</Text>
         </TouchableOpacity>
 
-      </View>
+        </View>
+      </ScrollView>
     )
   };
 };
@@ -135,6 +175,7 @@ const { width: WIDTH } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   backgroundContainer: {
+    marginTop: 30,
     flex: 1,
     width: null,
     height: null,
@@ -142,13 +183,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   map: {
-    // position: 'absolute',
-    // top: 0,
-    // marginTop: 5,
-    width: 300,
+    top: 0,
+    marginTop: 18,
+    width: 200,
     height: 150,
     resizeMode: 'contain',
-    tintColor: 'black'
   },
   signUp: {
     marginTop: 10,
@@ -187,6 +226,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: 'black',
     textDecorationLine: 'underline'
+  },
+  address: {
+    width: WIDTH - 55,
+    height: 70,
+    borderRadius: 10,
+    fontSize: 16,
+    paddingLeft: 45,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    color: 'rgba(0, 0, 0, 0.7)',
+    marginHorizontal: 25,
   }
 });
 
