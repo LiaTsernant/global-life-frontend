@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TouchableHighlight, Dimensions } from 'react-native';
 
-class CountryModalOptions extends Component {
+class CountryModalOptions extends React.Component {
   constructor(props) {
     super(props);
     this.options = ['Egypt', 'Greece', 'Italy', 'Russia']
