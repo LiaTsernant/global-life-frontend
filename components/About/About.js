@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-// import { Header } from './components/Header/Header';
+import Header from '../Header/Header';
 
-export default class About extends Component {
+class About extends React.Component {
   render() {
     return (
-      <View style={styles.backgroundContainer}>
-          <Text>I AM ABOUT PAGE</Text>
-      </View>
+      <>
+      <Header />
+        <View style={styles.backgroundContainer}>
+          <View>
+            <Text style={styles.countryName}>ABOUT</Text>
+          </View>
+        </View>
+      </>
     );
   };
 };
 
 const styles = StyleSheet.create({
   backgroundContainer: {
-      backgroundColor: 'black',
       flex: 1,
       width: null,
       height: null,
@@ -22,3 +26,5 @@ const styles = StyleSheet.create({
       alignItems: 'center',
   }
 });
+
+export default About
