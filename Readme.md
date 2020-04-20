@@ -19,6 +19,8 @@ Node,
 React Native,  
 MongoDB,  
 
+![GL](https://wayfarer.s3.amazonaws.com/main.jpg)
+
 #### Next Features
 * Translation to different languages.
 * SignUp with mobile phone.
