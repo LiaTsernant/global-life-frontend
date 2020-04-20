@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     fontSize: 35
   },
   input: {
-    width: 300,
+    width: WIDTH - 55,
     height: 30,
     borderRadius: 45,
     fontSize: 14,
@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   email: {
-    width: 300,
+    width: WIDTH - 55,
     height: 30,
     borderRadius: 45,
     fontSize: 14,
